@@ -1,247 +1,94 @@
 <template>
   <v-container>
-    <!-- <v-tabs v-model="tab" class="tabs" grow>
-      <v-tabs-slider color="primary"></v-tabs-slider>
-      <v-tab v-for="n in 3" :key="n">Item {{ n }}</v-tab>
-    </v-tabs>-->
-
     <v-tabs @change="getFullTimetable()" class="tabs" v-model="tab" grow>
       <v-tabs-slider color="primary"></v-tabs-slider>
 
-      <v-tab v-for="division in divisions" :key="division">{{ division }}</v-tab>
+      <v-tab v-for="division in divisions" :key="division">{{
+        division
+      }}</v-tab>
     </v-tabs>
 
     <v-tabs-items v-model="tab">
-      <v-tab-item v-for="(division) in divisions" :key="division">
+      <v-tab-item v-for="division in divisions" :key="division">
         <v-layout wrap>
           <v-flex md3 xs12>
             <v-layout column>
-              <v-flex
-                style="font-weight: 700; color: grey"
-                class="headline"
-              >{{mainOptions.college}} - {{mainOptions.department}} - {{mainOptions.year}} - {{divisions[tab]}}</v-flex>
+              <v-flex style="font-weight: 700; color: grey" class="headline"
+                >{{ mainOptions.college }} - {{ mainOptions.department }} -
+                {{ mainOptions.year }} - {{ divisions[tab] }}</v-flex
+              >
+              <v-flex> <h1>Select number of columns:</h1> </v-flex>
               <v-flex>
                 <v-combobox
-                  v-model="selectOptions.day"
-                  :items="days"
-                  prepend-icon="today"
-                  prefix="Day: "
+                  v-model="mondayColumn"
+                  :items="numberOptions"
+                  prefix="Monday: "
                 ></v-combobox>
               </v-flex>
               <v-flex>
                 <v-combobox
-                  v-model="selectOptions.subject"
-                  :items="ourCourse"
-                  prepend-icon="subject"
-                  prefix="Subject: "
+                  v-model="tuesdayColumn"
+                  :items="numberOptions"
+                  prefix="Tuesday: "
                 ></v-combobox>
               </v-flex>
               <v-flex>
                 <v-combobox
-                  v-model="selectOptions.teacher"
-                  :items="ourFaculty"
-                  prepend-icon="person"
-                  prefix="Teacher: "
-                  @change="getSdrn(selectOptions.teacher)"
-                ></v-combobox>
-              </v-flex>
-              <v-flex>
-                <v-layout>
-                  <v-flex md6>
-                    <v-combobox
-                      v-model="selectOptions.start_time"
-                      :items="times"
-                      prepend-icon="access_time"
-                      prefix="Start:"
-                    ></v-combobox>
-                    <!-- <v-combobox
-                      v-model="selectOptions.start_time"
-                      :items="items"
-                      prepend-icon="access_time"
-                      prefix="Start time: "
-                      readonly
-                      @click="startTimeMenu = !startTimeMenu"
-                    ></v-combobox>-->
-
-                    <!-- <v-time-picker
-                      style="position: absolute; opacity: 1; z-index: 100; width: 290px"
-                      v-if="startTimeMenu"
-                      v-model="selectOptions.start_time"
-                      width="200"
-                    >
-                      <div
-                        style="display: flex; justify-content: flex-end; width: 100%; margin: 0 1rem; "
-                      >
-                        <v-btn @click="startTimeMenu = !startTimeMenu" color="primary" round>OK</v-btn>
-                      </div>
-                    </v-time-picker>-->
-                    <!-- 
-                    <v-menu
-                      ref="startTimeRef"
-                      v-model="startTime[index]"
-                      :close-on-content-click="false"
-                      :nudge-right="40"
-                      :return-value.sync="startTimeTime"
-                      lazy
-                      transition="scale-transition"
-                      offset-y
-                      full-width
-                      max-width="200px"
-                      min-width="200px"
-                    >
-                      <template v-slot:activator="{ on }">
-                        <v-text-field
-                          v-model="startTimeTime"
-                          label="Start Time"
-                          prepend-icon="access_time"
-                          readonly
-                          v-on="on"
-                        ></v-text-field>
-                      </template>
-                      <v-time-picker
-                        v-if="startTime[index]"
-                        v-model="startTimeTime"
-                        full-width
-                      ></v-time-picker>
-                    </v-menu>-->
-                  </v-flex>
-                  <v-flex md1></v-flex>
-                  <v-flex md6>
-                    <v-combobox
-                      v-model="selectOptions.end_time"
-                      :items="times"
-                      prepend-icon="alarm"
-                      prefix="End:"
-                    ></v-combobox>
-                    <!-- <v-combobox
-                      v-model="selectOptions.end_time"
-                      prepend-icon="alarm"
-                      prefix="End time: "
-                      readonly
-                      @click="endTimeMenu = !endTimeMenu"
-                    ></v-combobox>
-
-                    <v-time-picker
-                      style="position: absolute; opacity: 1; z-index: 100; width: 290px"
-                      v-if="endTimeMenu"
-                      v-model="selectOptions.end_time"
-                      width="200"
-                    >
-                      <div
-                        style="display: flex; justify-content: flex-end; width: 100%; margin: 0 1rem; "
-                      >
-                        <v-btn @click="endTimeMenu = !endTimeMenu" color="primary" round>OK</v-btn>
-                      </div>
-                    </v-time-picker>-->
-
-                    <!-- <v-menu
-                      ref="endTimeRef"
-                      v-model="endTime[index]"
-                      :close-on-content-click="false"
-                      :nudge-right="40"
-                      :return-value.sync="endTimeTime"
-                      lazy
-                      transition="scale-transition"
-                      offset-y
-                      full-width
-                      max-width="200px"
-                      min-width="200px"
-                    >
-                      <template v-slot:activator="{ on }">
-                        <v-text-field
-                          v-model="endTimeTime"
-                          label="End Time: "
-                          prepend-icon="alarm"
-                          readonly
-                          v-on="on"
-                        ></v-text-field>
-                      </template>
-                      <v-time-picker
-                        v-if="endTime[index]"
-                        min="08:30am"
-                        max="7:30pm"
-                        v-model="endTimeTime"
-                        full-width
-                        @click:minute="$refs.endTimeRef.save(endTimeTime)"
-                      ></v-time-picker>
-                    </v-menu>-->
-                  </v-flex>
-                </v-layout>
-              </v-flex>
-
-              <v-flex>
-                <v-combobox
-                  v-model="selectOptions.room"
-                  :items="classRooms"
-                  prepend-icon="meeting_room"
-                  prefix="Classroom: "
+                  v-model="wednesdayColumn"
+                  :items="numberOptions"
+                  prefix="Wednesday: "
                 ></v-combobox>
               </v-flex>
               <v-flex>
                 <v-combobox
-                  v-model="selectOptions.batch"
-                  :items="batches"
-                  prepend-icon="exposure_plus_1"
-                  prefix="Batches: "
+                  v-model="thursdayColumn"
+                  :items="numberOptions"
+                  prefix="Thursday: "
+                ></v-combobox>
+              </v-flex>
+              <v-flex>
+                <v-combobox
+                  v-model="fridayColumn"
+                  :items="numberOptions"
+                  prefix="Friday: "
+                ></v-combobox>
+              </v-flex>
+              <v-flex>
+                <v-combobox
+                  v-model="saturdayColumn"
+                  :items="numberOptions"
+                  prefix="Saturday: "
                 ></v-combobox>
               </v-flex>
             </v-layout>
-            <v-btn
-              fab
-              @click="addCard()"
-              style="float: right; transform: translateX(1.5rem)"
-              small
-              color="primary"
-            >
-              <v-icon dark>add</v-icon>
-            </v-btn>
           </v-flex>
 
           <v-flex md1 xs12>
             <v-divider class="card-divider" inset vertical></v-divider>
           </v-flex>
           <v-flex md8 xs12>
-            <div style="font-weight: 700; color: gray" class="headline">Timetable</div>
+            <div style="font-weight: 700; color: gray" class="headline">
+              Timetable
+            </div>
             <div>
-              <!-- <v-container style="max-height: 400px" class="overflow-y-auto"> -->
-              <!-- <v-card v-for="(x, index) in ourTimetable" class="timetable-card" :key="index">
-                  <v-card-title>
-                    <div class="subject_container">
-                      <div class="headline">{{x.day}} - {{x.subject}}</div>
-                      <div class="delete_button">
-                        <v-btn color="primary" fab small @click="deleteRecord(x.srno)">
-                          <v-icon dark>remove</v-icon>
-                        </v-btn>
-                      </div>
-                    </div>
-                  </v-card-title>
-                  <v-card-text>
-                    <v-layout column>
-                      <v-flex>Teacher: {{ x.sdrn }}</v-flex>
-                      <v-flex>{{ x.start_time }} - {{ x.end_time }}</v-flex>
-                      <v-flex>Classroom: {{ x.room }}</v-flex>
-                      <v-flex>Batches: {{ x.batch }}</v-flex>
-                    </v-layout>
-                  </v-card-text>
-              </v-card>-->
-
-              <InDepthView @parentDelete="deleteRecord" :key="keyCounter" :timetable="ourTimetable"></InDepthView>
-
-              <!-- </v-container> -->
+              <TileComponent />
             </div>
           </v-flex>
         </v-layout>
       </v-tab-item>
     </v-tabs-items>
     <v-snackbar v-model="errorSnackbar.display" :timeout="5000">
-      {{errorSnackbar.text}}
-      <v-btn color="primary" text @click="errorSnackbar.display = false">Close</v-btn>
+      {{ errorSnackbar.text }}
+      <v-btn color="primary" text @click="errorSnackbar.display = false"
+        >Close</v-btn
+      >
     </v-snackbar>
   </v-container>
 </template>
 
 <script>
 import InDepthView from "../../components/principal/InDepthView";
+import TileComponent from "../TileComponent";
 import {
   getTimetable,
   addTimetable,
@@ -251,6 +98,13 @@ import { mapState } from "vuex";
 
 export default {
   data() {
+    mondayColumn: 0;
+    tuesdayColumn: 0;
+    wednesdayColumn: 0;
+    thursdayColumn: 0;
+    fridayColumn: 0;
+    saturdayColumn: 0;
+    const numberOptions = ["1", "2", "3", "4", "5", "6", "7"];
     const days = [
       "Monday",
       "Tuesday",
@@ -334,8 +188,6 @@ export default {
       },
 
       keyCounter: 0,
-
-      noOfCards: 5,
       tab: 0,
       text: "Lorem ipsum dolor sit .",
       finalTimetable: []
@@ -412,7 +264,8 @@ export default {
   },
   props: ["timetable", "faculty"],
   components: {
-    InDepthView
+    InDepthView,
+    TileComponent
   },
   methods: {
     addCard() {
@@ -460,12 +313,6 @@ export default {
         this.ourTimetable = res;
         console.log(res);
       });
-    },
-    getSdrn(teacherName) {
-      let abc = this.faculty.faculty.find(function(element) {
-        return element.name == teacherName;
-      });
-      this.selectOptions.sdrn = abc.sdrn.toString();
     },
     deleteRecord(srno) {
       console.log("deleted something " + srno);

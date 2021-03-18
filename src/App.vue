@@ -2,7 +2,12 @@
   <v-app>
     <div v-if="abc">
       <v-toolbar style="height: 10rem" color="primary" extended flat>
-        <v-img class="logo" :src="require('./assets/rait_logo.png')" max-width="160" alt></v-img>
+        <v-img
+          class="logo"
+          :src="require('./assets/rait_logo.png')"
+          max-width="160"
+          alt
+        ></v-img>
       </v-toolbar>
 
       <v-content>
@@ -11,7 +16,12 @@
     </div>
     <div v-else>
       <v-toolbar style="height: 10rem" color="primary" extended flat>
-        <v-img class="logo" :src="require('./assets/rait_logo.png')" max-width="160" alt></v-img>
+        <v-img
+          class="logo"
+          :src="require('./assets/rait_logo.png')"
+          max-width="160"
+          alt
+        ></v-img>
       </v-toolbar>
       <v-content class="container-flex">
         <router-view></router-view>
@@ -37,8 +47,6 @@ export default {
   }
 };
 </script>
-
-
 
 <style lang="stylus">
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,900&display=swap');

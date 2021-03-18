@@ -7,7 +7,7 @@
           <v-flex>
             <v-combobox
               v-model="university.selected"
-              @input="changeOption($event ,'university')"
+              @input="changeOption($event, 'university')"
               :items="university.items"
               prepend-icon="location_city"
               prefix="University: "
@@ -16,7 +16,7 @@
           <v-flex>
             <v-combobox
               v-model="college.selected"
-              @input="changeOption($event ,'college')"
+              @input="changeOption($event, 'college')"
               :items="college.items"
               prepend-icon="account_balance"
               prefix="College: "
@@ -25,7 +25,7 @@
           <v-flex>
             <v-combobox
               v-model="departmentSelect"
-              @input="changeOption($event ,'department')"
+              @input="changeOption($event, 'department')"
               :items="department"
               prepend-icon="school"
               prefix="Department: "
@@ -34,7 +34,7 @@
           <v-flex>
             <v-combobox
               v-model="yearSelect"
-              @input="changeOption($event ,'year')"
+              @input="changeOption($event, 'year')"
               :items="year"
               prepend-icon="calendar_today"
               prefix="Year: "
