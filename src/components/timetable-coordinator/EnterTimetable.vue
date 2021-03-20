@@ -74,42 +74,42 @@
             <v-row class="spacing-column" dense="2px">
               <h3 class="day-spacing">Monday</h3>
               <v-col :key="num" v-for="num in mondayColumn">
-                <TileComponent />
+                <TileComponent :faculty="faculty" />
               </v-col>
             </v-row>
             <v-divider></v-divider>
             <v-row class="spacing-column" dense="2px">
               <h3>Tuesday</h3>
               <v-col :key="num" v-for="num in tuesdayColumn">
-                <TileComponent />
+                <TileComponent :faculty="faculty" />
               </v-col>
             </v-row>
             <v-divider></v-divider>
             <v-row class="spacing-column" dense="2px">
               <h3 class="day-spacing">Wednesday</h3>
               <v-col :key="num" v-for="num in wednesdayColumn">
-                <TileComponent />
+                <TileComponent :faculty="faculty" />
               </v-col>
             </v-row>
             <v-divider></v-divider>
             <v-row class="spacing-column" dense="2px">
               <h3 class="day-spacing">Thursday</h3>
               <v-col :key="num" v-for="num in thursdayColumn">
-                <TileComponent />
+                <TileComponent :faculty="faculty" />
               </v-col>
             </v-row>
             <v-divider></v-divider>
             <v-row class="spacing-column" dense="2px">
               <h3 class="day-spacing">Friday</h3>
               <v-col :key="num" v-for="num in fridayColumn">
-                <TileComponent />
+                <TileComponent :faculty="faculty" />
               </v-col>
             </v-row>
             <v-divider></v-divider>
             <v-row class="spacing-column" dense="2px">
               <h3 class="day-spacing">Saturday</h3>
               <v-col :key="num" v-for="num in saturdayColumn">
-                <TileComponent />
+                <TileComponent :faculty="faculty" />
               </v-col>
             </v-row>
           </v-flex>
