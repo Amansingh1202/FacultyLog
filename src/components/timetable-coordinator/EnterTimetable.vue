@@ -61,6 +61,7 @@
                 ></v-combobox>
               </v-flex>
             </v-layout>
+            <v-btn color="primary">Done</v-btn>
           </v-flex>
 
           <v-flex md1 xs12>
@@ -70,9 +71,47 @@
             <div style="font-weight: 700; color: gray" class="headline">
               Timetable
             </div>
-            <div>
-              <TileComponent />
-            </div>
+            <v-row class="spacing-column" dense="2px">
+              <h3 class="day-spacing">Monday</h3>
+              <v-col :key="num" v-for="num in mondayColumn">
+                <TileComponent />
+              </v-col>
+            </v-row>
+            <v-divider></v-divider>
+            <v-row class="spacing-column" dense="2px">
+              <h3>Tuesday</h3>
+              <v-col :key="num" v-for="num in tuesdayColumn">
+                <TileComponent />
+              </v-col>
+            </v-row>
+            <v-divider></v-divider>
+            <v-row class="spacing-column" dense="2px">
+              <h3 class="day-spacing">Wednesday</h3>
+              <v-col :key="num" v-for="num in wednesdayColumn">
+                <TileComponent />
+              </v-col>
+            </v-row>
+            <v-divider></v-divider>
+            <v-row class="spacing-column" dense="2px">
+              <h3 class="day-spacing">Thursday</h3>
+              <v-col :key="num" v-for="num in thursdayColumn">
+                <TileComponent />
+              </v-col>
+            </v-row>
+            <v-divider></v-divider>
+            <v-row class="spacing-column" dense="2px">
+              <h3 class="day-spacing">Friday</h3>
+              <v-col :key="num" v-for="num in fridayColumn">
+                <TileComponent />
+              </v-col>
+            </v-row>
+            <v-divider></v-divider>
+            <v-row class="spacing-column" dense="2px">
+              <h3 class="day-spacing">Saturday</h3>
+              <v-col :key="num" v-for="num in saturdayColumn">
+                <TileComponent />
+              </v-col>
+            </v-row>
           </v-flex>
         </v-layout>
       </v-tab-item>
@@ -87,7 +126,6 @@
 </template>
 
 <script>
-import InDepthView from "../../components/principal/InDepthView";
 import TileComponent from "../TileComponent";
 import {
   getTimetable,
@@ -98,23 +136,6 @@ import { mapState } from "vuex";
 
 export default {
   data() {
-    mondayColumn: 0;
-    tuesdayColumn: 0;
-    wednesdayColumn: 0;
-    thursdayColumn: 0;
-    fridayColumn: 0;
-    saturdayColumn: 0;
-    const numberOptions = ["1", "2", "3", "4", "5", "6", "7"];
-    const days = [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "SaturdayEven",
-      "SaturdayOdd"
-    ];
-
     const times = [
       "08:00:00",
       "08:30:00",
@@ -143,10 +164,16 @@ export default {
     ];
 
     return {
+      mondayColumn: 0,
+      tuesdayColumn: 0,
+      wednesdayColumn: 0,
+      thursdayColumn: 0,
+      fridayColumn: 0,
+      saturdayColumn: 0,
+      numberOptions: [1, 2, 3, 4, 5, 6, 7],
       select: "Programming",
       items: ["Programming", "Design", "Vue", "Vuetify"],
       times: times,
-      days: days,
 
       errorSnackbar: {
         display: false,
@@ -166,7 +193,6 @@ export default {
       // endTime: [false, false, false],
 
       selectOptions: {
-        day: days[0],
         end_time: null,
         start_time: null,
         subject: "Select",
@@ -264,7 +290,6 @@ export default {
   },
   props: ["timetable", "faculty"],
   components: {
-    InDepthView,
     TileComponent
   },
   methods: {
@@ -352,5 +377,14 @@ export default {
 .delete_button {
   position: absolute;
   right: 0;
+}
+
+.spacing-column{
+  margin-top:20px;
+  margin-bottom:20px
+}
+
+.day-spacing{
+  margin-right:5px;
 }
 </style>

@@ -2,7 +2,7 @@
   <v-card class="card--flex-toolbar">
     <v-toolbar dark color="secondary darken-1">
       <v-btn icon @click="e1 = 1">
-        <v-icon>arrow_back</v-icon>
+        <v-icon>arrow_</v-icon>
       </v-btn>
       <v-btn icon @click="e1 = 2">
         <v-icon>arrow_forward</v-icon>
@@ -11,13 +11,23 @@
     </v-toolbar>
 
     <v-stepper v-model="e1">
-      <v-stepper-header >
-        <v-stepper-step v-if="parentTabs == 0" color="primary" :complete="e1 > 1" step="1">Select Options</v-stepper-step>
-        <v-stepper-step v-else color="primary" :complete="e1 > 1" step="1">In-Depth Search</v-stepper-step>
+      <v-stepper-header>
+        <v-stepper-step
+          v-if="parentTabs == 0"
+          color="primary"
+          :complete="e1 > 1"
+          step="1"
+          >Select Options</v-stepper-step
+        >
+        <v-stepper-step v-else color="primary" :complete="e1 > 1" step="1"
+          >In-Depth Search</v-stepper-step
+        >
 
         <v-divider></v-divider>
 
-        <v-stepper-step v-if="parentTabs == 0" :complete="e1 > 2" step="2">View Timetable</v-stepper-step>
+        <v-stepper-step v-if="parentTabs == 0" :complete="e1 > 2" step="2"
+          >View Timetable</v-stepper-step
+        >
 
         <v-divider></v-divider>
       </v-stepper-header>
@@ -29,8 +39,13 @@
           <select-options v-model="parentTabs"></select-options>
 
           <v-layout justify-end>
-            <v-flex xs1 style="text-align: center" >
-              <v-btn v-if="parentTabs == 0" color="primary" @click="getPrinciTimetable()">Next</v-btn>
+            <v-flex xs1 style="text-align: center">
+              <v-btn
+                v-if="parentTabs == 0"
+                color="primary"
+                @click="getPrinciTimetable()"
+                >Next</v-btn
+              >
             </v-flex>
           </v-layout>
         </v-stepper-content>
@@ -38,10 +53,12 @@
         <v-stepper-content step="2">
           <!-- <v-card class="mb-5" color="grey lighten-1" height="200px"></v-card> -->
 
-          <view-timetable :parentPrincipalTimetable="parentPrincipalTimetable" />
+          <view-timetable
+            :parentPrincipalTimetable="parentPrincipalTimetable"
+          />
 
           <v-layout justify-end>
-            <v-flex xs1 style="text-align: center" class="mt-5" >
+            <v-flex xs1 style="text-align: center" class="mt-5">
               <v-btn color="primary" @click="e1 = 1">Back</v-btn>
             </v-flex>
           </v-layout>
