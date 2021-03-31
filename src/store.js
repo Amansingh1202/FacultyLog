@@ -66,6 +66,7 @@ export default new Vuex.Store({
             return item.id !== payload.id;
           });
           state.tuesdayTable.push({
+            id: payload.id,
             faculty: payload.faculty,
             class: payload.class,
             course: payload.course
@@ -77,6 +78,7 @@ export default new Vuex.Store({
             return item.id !== payload.id;
           });
           state.wednesdayTable.push({
+            id: payload.id,
             faculty: payload.faculty,
             class: payload.class,
             course: payload.course
@@ -88,6 +90,7 @@ export default new Vuex.Store({
             return item.id !== payload.id;
           });
           state.thursdayTable.push({
+            id: payload.id,
             faculty: payload.faculty,
             class: payload.class,
             course: payload.course
@@ -99,6 +102,7 @@ export default new Vuex.Store({
             return item.id !== payload.id;
           });
           state.fridayTable.push({
+            id: payload.id,
             faculty: payload.faculty,
             class: payload.class,
             course: payload.course
@@ -110,6 +114,7 @@ export default new Vuex.Store({
             return item.id !== payload.id;
           });
           state.saturdayTable.push({
+            id: payload.id,
             faculty: payload.faculty,
             class: payload.class,
             course: payload.course
