@@ -74,42 +74,54 @@
             <v-row class="spacing-column" dense="2px">
               <h3 class="day-spacing">Monday</h3>
               <v-col :key="num" v-for="num in mondayColumn">
-                <TileComponent :faculty="faculty" />
+                <TileComponent :id="getId()" day="Monday" :faculty="faculty" />
               </v-col>
             </v-row>
             <v-divider></v-divider>
             <v-row class="spacing-column" dense="2px">
               <h3>Tuesday</h3>
               <v-col :key="num" v-for="num in tuesdayColumn">
-                <TileComponent :faculty="faculty" />
+                <TileComponent :id="getId()" day="Tuesday" :faculty="faculty" />
               </v-col>
             </v-row>
             <v-divider></v-divider>
             <v-row class="spacing-column" dense="2px">
               <h3 class="day-spacing">Wednesday</h3>
               <v-col :key="num" v-for="num in wednesdayColumn">
-                <TileComponent :faculty="faculty" />
+                <TileComponent
+                  :id="getId()"
+                  day="Wednesday"
+                  :faculty="faculty"
+                />
               </v-col>
             </v-row>
             <v-divider></v-divider>
             <v-row class="spacing-column" dense="2px">
               <h3 class="day-spacing">Thursday</h3>
               <v-col :key="num" v-for="num in thursdayColumn">
-                <TileComponent :faculty="faculty" />
+                <TileComponent
+                  :id="getId()"
+                  day="Thursday"
+                  :faculty="faculty"
+                />
               </v-col>
             </v-row>
             <v-divider></v-divider>
             <v-row class="spacing-column" dense="2px">
               <h3 class="day-spacing">Friday</h3>
               <v-col :key="num" v-for="num in fridayColumn">
-                <TileComponent :faculty="faculty" />
+                <TileComponent :id="getId()" day="Friday" :faculty="faculty" />
               </v-col>
             </v-row>
             <v-divider></v-divider>
             <v-row class="spacing-column" dense="2px">
               <h3 class="day-spacing">Saturday</h3>
               <v-col :key="num" v-for="num in saturdayColumn">
-                <TileComponent :faculty="faculty" />
+                <TileComponent
+                  :id="getId()"
+                  day="Saturday"
+                  :faculty="faculty"
+                />
               </v-col>
             </v-row>
           </v-flex>
@@ -164,6 +176,12 @@ export default {
     ];
 
     return {
+      mondayData: [],
+      tuesdayData: [],
+      wednesdayData: [],
+      thursdayData: [],
+      fridayData: [],
+      saturdayData: [],
       mondayColumn: 0,
       tuesdayColumn: 0,
       wednesdayColumn: 0,
@@ -293,6 +311,10 @@ export default {
     TileComponent
   },
   methods: {
+    getId() {
+      console.log(performance.now());
+      return performance.now();
+    },
     addCard() {
       // this.noOfCards++;
       addTimetable(
