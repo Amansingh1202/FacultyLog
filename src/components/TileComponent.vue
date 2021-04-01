@@ -11,8 +11,9 @@
       v-model="facultyName"
       :items="faculty.faculty"
       label="Faculty"
-      dense
-      light
+      denses
+      color="orange"
+      background-color="yellow"
     >
     </v-select>
     <v-select
@@ -20,7 +21,8 @@
       :items="classroom"
       label="classroom"
       dense
-      light
+      background-color="yellow"
+      color="orange"
     >
     </v-select>
     <v-select
@@ -28,7 +30,8 @@
       :items="faculty.course"
       label="course"
       dense
-      light
+      background-color="yellow"
+      color="orange"
     >
     </v-select>
   </v-card>
@@ -51,8 +54,7 @@ export default {
       const style = {
         backgroundColor: this.getRandomColor(),
         padding: "5px",
-        borderRadius: "4px",
-        color: "white"
+        borderRadius: "4px"
       };
       return style;
     }
